@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Birthday Movie 🎬</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:black;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* intro */
+#intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.title{
+  font-size:42px;
+  color:#ff4fa3;
+  text-shadow:0 0 20px #ff4fa3;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  opacity:0.8;
+}
+
+/* pages */
+.page{
+  display:none;
+  height:100vh;
+  padding:20px;
+}
+
+.active{
+  display:block;
+}
+
+/* message box */
+.message{
+  background:rgba(255,255,255,0.08);
+  padding:20px;
+  border-radius:15px;
+  height:65vh;
+  overflow:auto;
+}
+
+/* button */
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff4fa3;
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  color:#ff4fa3;
+  animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* typing */
+#typing{
+  min-height:40px;
+  margin-top:20px;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎬 INTRO -->
+<div id="intro">
+  <div class="title">🎬 A Birthday Story</div>
+  <div class="subtitle">Made with care for someone special ❤️</div>
+  <button onclick="start()">Play ▶</button>
+</div>
+
+<!-- 🔐 PAGE -->
+<div class="page" id="p0">
+  <h1>🔐 Unlock Memory</h1>
+  <p>Hint: love</p>
+  <input type="password" id="pass">
+  <br>
+  <button onclick="check()">Enter</button>
+</div>
+
+<!-- 💖 PAGE -->
+<div class="page" id="p1">
+  <h1>💖 Welcome</h1>
+  <div id="typing"></div>
+  <button onclick="next(2)">Continue ▶</button>
+</div>
+
+<!-- 💌 PAGE -->
+<div class="page" id="p2">
+  <div class="message">
+
+  <h2>🎬 Your Story</h2>
+
+  <p>1. Aaj ka din sirf birthday nahi… ek memory hai 🎂</p>
+  <p>2. Tum wo insaan ho jo quietly special ban jata hai ❤️</p>
+  <p>3. Tumhari smile natural aur beautiful hai 😊</p>
+  <p>4. Tum bina effort ke bhi yaad reh jate ho ✨</p>
+
+  <br>
+
+  <p>5. Har koi important nahi hota… but tum ho 💖</p>
+  <p>6. Tum ek feeling ho jo words se explain nahi hoti 🌙</p>
+  <p>7. Tum simple ho… aur wahi tumhe unique banata hai 💫</p>
+
+  <br>
+
+  <h2>🎂 HAPPY BIRTHDAY 🎂</h2>
+  <p>You are special… always ❤️</p>
+
+  </div>
+</div>
+
+<script>
+
+/* start */
+function start(){
+  document.getElementById("intro").style.display="none";
+  next(0);
+}
+
+/* page switch */
+function next(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+/* password */
+function check(){
+  let p=document.getElementById("pass").value;
+  if(p==="love"){
+    next(1);
+    typing();
+    hearts();
+  } else {
+    alert("Wrong ❌ Hint: love");
+  }
+}
+
+/* typing */
+let text="Loading memory...\nYou are the main character of this story ❤️";
+let i=0;
+
+function typing(){
+  let el=document.getElementById("typing");
+  let t=setInterval(()=>{
+    el.innerHTML += text[i]==="\n"?"<br>":text[i];
+    i++;
+    if(i>=text.length) clearInterval(t);
+  },70);
+}
+
+/* hearts */
+function hearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
+}
+
+</script>
+
+</body>
+</html>
