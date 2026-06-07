@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Harshuu ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#ffd6e7;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* pages */
+.page{
+  display:none;
+  height:100vh;
+  padding:20px;
+}
+.active{display:block;}
+
+/* buttons */
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:#ff4fa3;
+  color:white;
+}
+
+/* heart rain */
+.heart{
+  position:fixed;
+  top:-10px;
+  color:red;
+  font-size:20px;
+  animation:fall 6s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* typing */
+#typing{
+  font-size:22px;
+  color:#d1006f;
+  margin-top:20px;
+  min-height:40px;
+}
+
+/* message box */
+.message{
+  height:60vh;
+  overflow:auto;
+  background:white;
+  padding:15px;
+  border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 PASSWORD PAGE -->
+<div class="page active" id="p0">
+  <h1>🔐 Enter Password</h1>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br><br>
+  <button onclick="checkPass()">Unlock ❤️</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1">
+  <h1>💖 Happy Birthday 💖</h1>
+  <div id="typing"></div>
+  <button onclick="next(2)">Next ❤️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>🐱 Surprise</h1>
+  <img src="https://placekitten.com/400/300">
+  <br><br>
+  <button onclick="next(3)">Next ❤️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h1>🎂 Happy Birthday 🎂</h1>
+  <button onclick="next(4)">Next ❤️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <h1>💌 Message</h1>
+  <div class="message" id="msg"></div>
+  <button onclick="next(5)">Next ❤️</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h1>🥹❤️ The End</h1>
+  <h2>Hope you liked it 💖</h2>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* password */
+function checkPass(){
+  let p = document.getElementById("pass").value;
+  if(p === "love"){
+    next(1);
+    startTyping();
+    startHearts();
+    loadMsg();
+  } else {
+    alert("Wrong password ❌ Hint: love");
+  }
+}
+
+/* page switch */
+function next(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+
+/* typing effect */
+let text = "Happy Birthday Harshuu ❤️ Tum meri life ka sabse special person ho ✨";
+let i = 0;
+
+function startTyping(){
+  let el = document.getElementById("typing");
+  let t = setInterval(()=>{
+    el.innerHTML += text[i];
+    i++;
+    if(i >= text.length) clearInterval(t);
+  },80);
+}
+
+/* heart rain */
+function startHearts(){
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
+}
+
+/* message */
+function loadMsg(){
+  let box = document.getElementById("msg");
+  for(let i=1;i<=50;i++){
+    box.innerHTML += i + ". Tum special ho ❤️<br>";
+  }
+}
+
+</script>
+
+</body>
+</html>
